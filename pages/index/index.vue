@@ -12,7 +12,7 @@
     export default {
         data() {
             return {
-               content:"我叫常开国"
+               content:"我叫啊啊啊"
             }
         },
         methods: {
