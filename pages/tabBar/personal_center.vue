@@ -53,14 +53,14 @@
 			</view>						
 		</view>	
 		<!--寄语-->
-		<view class="message">
+		<!-- <view class="message">
 			<view class="my-message">
 				<text >寄语</text>
 			</view>		
 			<view class="item item-noBorder">
 				<text class="item-text">{{myIntroducation}}</text>
 			</view>
-		</view>
+		</view> -->
 		
     </view>
 </template>
