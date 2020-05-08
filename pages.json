@@ -2,9 +2,11 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "今天心情"	
-			
-		
+			"navigationBarTitleText": "今天心情"	,
+			"app-plus": {
+							// 手机端隐藏滚动条，保留滚动效果
+							"scrollIndicator":"none"
+						}
 			}
 		},
 		{
