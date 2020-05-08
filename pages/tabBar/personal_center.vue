@@ -231,12 +231,11 @@
 		text-align: center;
 	}
 	.tag{
-		display: inline-block;
+		display: flex;
+		flex-wrap: wrap;
 	}
 	.tag-list{
-		float: left;
-		margin: 15upx;
-		overflow: hidden;
+		margin: 5px;
 	}
 	.image-list img{
 		margin:5px;
