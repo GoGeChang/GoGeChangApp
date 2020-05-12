@@ -4,10 +4,11 @@
 		"style": {
 			"navigationBarTitleText": "今天心情"	,
 			"app-plus": {
-							// 手机端隐藏滚动条，保留滚动效果
-							"scrollIndicator":"none"
-						}
-			}
+				// 手机端隐藏滚动条，保留滚动效果
+				"scrollIndicator":"none"
+			},
+			"enablePullDownRefresh":true
+		}
 		},
 		{
 			"path": "pages/tabBar/myToday",
@@ -24,9 +25,9 @@
         }
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#fff",
 		"backgroundColor": "#FFFFFF"
 	},
 	"tabBar":{
@@ -53,6 +54,13 @@
 			"text":"我的"
 			}
 		]
+	},
+	"titleNView":{
+		"splitLine": { //原生导航栏加下边框
+			"color": "#F5F5F5",
+			"height": "1px"
+		}
 	}
+
 	
 }

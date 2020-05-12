@@ -51,7 +51,7 @@
 				<uni-tag text="跑步" type="primary" inverted=true :circle="true" class="tag-list"></uni-tag>
 				<uni-tag text="乐观" type="success" inverted=true :circle="true" class="tag-list"></uni-tag>
 			</view>						
-		</view>	
+		</view>		
 		<!--寄语-->
 		<!-- <view class="message">
 			<view class="my-message">
@@ -60,7 +60,7 @@
 			<view class="item item-noBorder">
 				<text class="item-text">{{myIntroducation}}</text>
 			</view>
-		</view> -->
+		</view>. -->
 		
     </view>
 </template>
