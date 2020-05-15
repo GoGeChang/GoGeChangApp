@@ -13,11 +13,16 @@ export default {
 </script>
 
 <style>
+	@import url("/static/ali_font/iconfont.css");
 /* 解决头条小程序组件内引入字体不生效的问题 */
 /* #ifdef MP-TOUTIAO */
 @font-face {
 	font-family: uniicons;
 	src: url('/static/uni.ttf');
+}
+@font-face {
+	font-family: "iconfont";
+	src: url('/static/ali_font/iconfont.ttf');
 }
 /* #endif */
 </style>

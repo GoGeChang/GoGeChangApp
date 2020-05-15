@@ -1,16 +1,17 @@
 <template>
-    <view >
+    <view>
 		<!-- <view id="toTop"></view>
 		<uni-fab
 		:popMenu = "popMenu"
 		:pattern = "pattern"
-		></uni-fab>	 -->	
+		></uni-fab>	 -->
+		<view class="zhanwei"></view>
+		<view class="zhanwei"></view>
 		<view class="nav-tab" >
 			<view class="nav-tab-tag" 
 				v-for="(val,key) in navTab.navList"
 				@click="tabChang(key)"
-				:class="{active:key === navTab.navTabNum}">
-				
+				:class="{active:key === navTab.navTabNum}">				
 				<!--绑定图标和文字-->
 				<view class="iconfont nav-tab-icon" 
 					  :class="navTab.navListIcon[key]">
@@ -19,21 +20,22 @@
 			</view>	
 			<view
 				class="nav-tab-line" 
-				:animation="navTabBottomLineAnimation"  style="left:30px;">
+				:animation="navTabBottomLineAnimation"  style="left:12px;">
 			 </view>			
 		</view>
-		<view class="infor-tab">
-			<view class="info-list-area" v-if="navTab.navTabNum === 0">
+		<scroll-view  class="infor-tab">
+			<view class="info-list-area" v-show="navTab.navTabNum===0" 
+			:thisAnimation = "indexTagAnimation"
+			:style="{width:srcollWidth}"
+			> <!-- -->
 				<view class="info-list-item" v-for="vlue in person">				
 					<view>
-						<!-- <view class="iconfont iconxiaocao"></view> -->
 						<view class="info-head-img-area">
 							<image class="info-head-img"
 							 src="../../static/imges/personal_center/cap-2923682_1920.jpg"
 							 mode = "aspectFill"
 							></image>
-						</view>
-						
+						</view>						
 						<view class="qianming">						
 							<view class="info-name">{{vlue.name}}</view>
 							<view class="info-qianming">
@@ -45,10 +47,7 @@
 						</view>
 					</view>
 					<view>						
-						<text class="infor-content">{{vlue.qianming}}</text>			
-						<!-- <view class="time-text">
-							2017年6月13日
-						</view> -->
+						<text class="infor-content">{{vlue.qianming}}</text>
 					</view>				
 					<view class="info-bottom">
 						<view>						
@@ -65,7 +64,10 @@
 					</view>
 				</view>
 			</view>
-			<view class="wish-area" v-if="navTab.navTabNum === 1">
+			<view class="wish-area" v-show="navTab.navTabNum===1"
+			:thisAnimation = "indexTagAnimation"
+			:style="{width:srcollWidth}"
+			> <!-- -->
 				<view class="wish-list-item" 
 					v-for="(val,index) in wishList"
 				>
@@ -81,7 +83,10 @@
 				</view>
 				
 			</view>
-			<view class="album " v-if="navTab.navTabNum === 2">
+			<view class="album" v-show="navTab.navTabNum===2"
+			:thisAnimation = "indexTagAnimation"
+			:style="{width:srcollWidth}"
+			> <!-- -->
 				<view class="album-list-area">
 					<image class="album-img" v-for="(src,index)  in album"
 							   :src = "src"
@@ -93,14 +98,12 @@
 			<!-- <view class="footprint" v-if="navTab.navTabNum === 2">
 				<map style="width: 100%;height: 100%;" ></map>
 			</view> -->
-		</view>
-		
-    </view>
-
-	
+		</scroll-view>		
+    </view>	
 </template>
 <script>
 	import uniFab from "../../components/uni-fab/uni-fab.vue"
+	
     export default {
         data() {
             return {
@@ -163,7 +166,9 @@
 					{image:"../../static/imges/index/xinyuan/jita.jpg",context:"练好吉他"}
 					
 				],
-				navTabBottomLineAnimation:{}
+				navTabBottomLineAnimation:{},
+				indexTagAnimation:{},
+				srcollWidth:0
             }
         },
         methods: {
@@ -173,14 +178,26 @@
 				let Animation = uni.createAnimation({
 					duration:300,
 					timingFunction:"ease-in-out"
-				})
-				this.navTabBottomLineAnimation = Animation;
-				Animation.translateX(key*85).step();//动态修改动画的值才能产生效果
+				});
+				this.navTabBottomLineAnimation = Animation;		
+				Animation.translateX(key*85).step();
 				this.navTabBottomLineAnimation = Animation.export(); 
+				let indexTagAnimation = uni.createAnimation({
+					duration:300,
+					timingFunction:"ease-in-out"
+				});
+				this.indexTagAnimation = indexTagAnimation;
+				indexTagAnimation.translateX(50*key).translateX(0*key).step();
+				this.indexTagAnimation = indexTagAnimation.export();
+								
 			}
         },
 		onLoad(){
-			
+			uni.getSystemInfo({
+				success(res) {
+					this.srcollWidth = res.windowWidth;
+				}
+			})
 		},
 		onPullDownRefresh (){
 			uni.startPullDownRefresh({
@@ -189,19 +206,25 @@
 				uni.stopPullDownRefresh();
 			},2000)
 		},
-		components :{uniFab}
+		components:{uniFab}
     }
 </script>
 
 <style>
-	@import url("https:////at.alicdn.com/t/font_1787456_dmrcs0rdo3l.css");
+	@import url("https://at.alicdn.com/t/font_1787456_qymsrof12v.css");
+	/* @import url("../../static/ali_font/iconfont.css"); */
 	.address-text,.iconpinglun,.iconaddress{
 		padding-right: 8upx;
+	}
+
+	.zhanwei{
+		height: var(--status-bar-height);
 	}
 	image{
 		width: 100%; 
 		height: 100%;		
 	}
+
 	.nav-tab,.info-list-area,.info-bottom,.info-list-item,.info-list-item :nth-child(1),.qianming,.info-qianming,.flex-row{
 		display: flex;		
 	}
@@ -210,7 +233,6 @@
 	}
 	.nav-tab{
 		padding:18px 0px 20upx 15upx;		
-		border-top:1px solid #eee;
 	}
 	.nav-tab:first-child{
 		margin-left: -22px;
@@ -223,12 +245,15 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 	}
+	.nav-tab-tag:nth-child(1){
+		margin-left: 5px;
+	}
 	.nav-tab-line{
 		position: absolute;
 		left: 10;
 		bottom: 0;
 		height: 2.5px;
-		width: 70px;
+		width: 55px;
 		border-radius: 8px;
 		background-color: #007AFF;
 	}
@@ -274,7 +299,7 @@
 	.flex-row,.info-list-area{
 		align-items: center;
 	}
-	.wish-area,.footprint,.album{
+	.info-list-area,.wish-area,.footprint,.album{
 		min-height: 500px;
 		width: 100%;
 		display: flex;
@@ -285,6 +310,7 @@
 		flex-direction: column;
 		margin-top: 15px;
 	}
+
 	.wish-list-item{
 		width: 100%;
 		height: 150px;
@@ -350,7 +376,7 @@
 		margin-top: 0;
 		background-color: #fff;
 		flex-direction: column;
-		padding: 10px 30px 0px 30px;
+		padding: 10px 0px 0px 0px;
 		
 	}
 	.info-list-area .info-list-item :nth-child(1){
