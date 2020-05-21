@@ -23,6 +23,6 @@ export default {
 @font-face {
 	font-family: "iconfont";
 	src: url('/static/ali_font/iconfont.ttf');
-}
+}	
 /* #endif */
 </style>

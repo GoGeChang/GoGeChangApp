@@ -18,7 +18,8 @@
 						 "fontSize":"18px",
 						 "width":"60px",
 						 "fontSrc":"/static/ali_font/iconfont.ttf",
-						 "float":"left"
+						 "float":"left",
+						 "filter":"more" //自定义属性来判断我点击的按钮
 					 },
 					 {
 						 "type":"none",
@@ -26,7 +27,8 @@
 						 "text":"\ue60d",
 						 "fontSize":"25px",
 						 "width":"60px",
-						 "float":"right"
+						 "float":"right",
+						 "filter":"release"//自定义属性来判断我点击的按钮
 					 }
 				 ]
 				},
@@ -38,17 +40,40 @@
 			
 		},
 		{
-			"path": "pages/tabBar/myToday",
+		    "path" : "pages/tabBar/personal_center",
+		    "style": {
+		    	"navigationBarTitleText": "我的",
+				"transparentTitle":"always"
+		    }
+		},
+		{
+			"path": "pages/tabBar/listening",
 			"style": {
-				"navigationBarTitleText": "静听音乐"
+				"navigationBarTitleText": "静听"	,
+				"app-plus":{
+					"titleNView":{
+						"type":"transparent",
+						"searchInput":{
+							"backgroundColor": "#fff",
+							"borderRadius": "6px", //输入框圆角
+							"placeholder": "请输入搜索内容",
+							"disabled": true //disable时点击输入框不置焦，可以跳到新页面搜索
+						}
+					}
+				}
+				
 			}
 		}
+        
         ,{
-            "path" : "pages/tabBar/personal_center",
-            "style": {
-            	"navigationBarTitleText": "我的",
-				"transparentTitle":"always"
-            }
+            "path" : "pages/index/release",
+            "style" : {
+				"navigationBarTitleText": "信息发布",
+				"app-plus":{
+					"animationType":"fade-in",
+					"animationDuration":300
+				}
+			}
         }
     ],
 	"globalStyle": {
@@ -70,7 +95,7 @@
 			"text":"心情"
 			
 			},{
-			"pagePath":"pages/tabBar/myToday",
+			"pagePath":"pages/tabBar/listening" ,
 			"iconPath":"static/imges/tabBar/musical.png",
 			"selectedIconPath": "static/imges/tabBar/selectMusical.png",
 			"text":"静听"

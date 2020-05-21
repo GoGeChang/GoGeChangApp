@@ -6,16 +6,35 @@
 		:pattern = "pattern"
 		></uni-fab>	 -->
 		<view class="zhanwei"></view>
-		<view class="zhanwei"></view>
-		<view class="nav-tab" >
+		<view class="zhanwei"></view>	
+		<view class="flex-row flex-com release"
+			:animation = "releaseAnimation.releaseAnimation" style="height:0px;opacity: 0;"
+		>
+			<view class="flex-row flex-com " style="width: 100%;">
+				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('xinqing')">
+					<image src="../../static/imges/index/mood.png" style="height: 50upx;width: 50upx;"></image>
+					<view>心情</view>
+				</view>
+				<view class="flex-row flex-com" hover-class="none">
+					<image src="../../static/imges/index/wish.png" style="height: 50upx;width: 50upx;"></image>
+					<text>心愿</text>
+				</view>	
+				<view class="flex-row flex-com" hover-class="none">
+					<image src="../../static/imges/index/picture.png" style="height: 40upx;width: 50upx;"></image>
+					<text>上传照片</text>
+				</view>	
+			</view>
+		</view>	
+		<view class="nav-tab" >		
 			<view class="nav-tab-tag" 
 				v-for="(val,key) in navTab.navList"
+				:key="key"
 				@click="tabChang(key)"
 				:class="{active:key === navTab.navTabNum}">				
 				<!--绑定图标和文字-->
 				<view class="iconfont nav-tab-icon" 
 					  :class="navTab.navListIcon[key]">
-					{{val}}
+					{{val}} 
 				</view>				
 			</view>	
 			<view
@@ -23,12 +42,15 @@
 				:animation="navTabBottomLineAnimation"  style="left:12px;">
 			 </view>			
 		</view>
-		<scroll-view  class="infor-tab">
-			<view class="info-list-area" v-show="navTab.navTabNum===0" 
-			:thisAnimation = "indexTagAnimation"
-			:style="{width:srcollWidth}"
-			> <!-- -->
-				<view class="info-list-item" v-for="vlue in person">				
+		<view  class="infor-tab">
+			<view   class = "info-list-area" 
+					v-show = "navTab.navTabNum===0" 
+					
+			> 
+				<view class="info-list-item" 
+					  v-for="(vlue,key) in person" 
+				      :key="key"
+			    >				
 					<view>
 						<view class="info-head-img-area">
 							<image class="info-head-img"
@@ -56,7 +78,7 @@
 								{{vlue.address}}
 							</view>						
 						</view>		 
-						<view class="flex-row">
+						<view class="flex-row" style="position: relative;right: 15upx;top: 5upx;">
 							<view class="iconfont iconzan1"></view>
 							<view class="iconfont iconpinglun1"></view>
 							<view class="iconfont iconzhuanfa"></view>
@@ -64,41 +86,40 @@
 					</view>
 				</view>
 			</view>
-			<view class="wish-area" v-show="navTab.navTabNum===1"
-			:thisAnimation = "indexTagAnimation"
-			:style="{width:srcollWidth}"
-			> <!-- -->
+			<view class="wish-area" 
+				v-show="navTab.navTabNum === 1"
+			> 
 				<view class="wish-list-item" 
-					v-for="(val,index) in wishList"
+					v-for="(val,key) in wishList"
+					:key="key"
 				>
 					<image 
-						:src = "wishList[index].image" 
+						:src = "wishList[key].image" 
 						mode = "aspectFill"
 						></image>
 						<view class="shadow"></view>
 						<view class="wish-list-text">
-							<text>{{index + 1}}.</text>
-							{{wishList[index].context}}
+							<text>{{key + 1}}.</text>
+							{{wishList[key].context}} 
 						</view>
 				</view>
 				
 			</view>
 			<view class="album" v-show="navTab.navTabNum===2"
-			:thisAnimation = "indexTagAnimation"
-			:style="{width:srcollWidth}"
-			> <!-- -->
+			> 
 				<view class="album-list-area">
-					<image class="album-img" v-for="(src,index)  in album"
+					<image class="album-img" v-for="(src,key)  in album"
 							   :src = "src"
 							   mode="aspectFill"
-						>
+							   :key = "key"
+						> 
 					</image>
 				</view>
 			</view>
 			<!-- <view class="footprint" v-if="navTab.navTabNum === 2">
 				<map style="width: 100%;height: 100%;" ></map>
 			</view> -->
-		</scroll-view>		
+		</view>		
     </view>	
 </template>
 <script>
@@ -167,14 +188,16 @@
 					
 				],
 				navTabBottomLineAnimation:{},
-				indexTagAnimation:{},
-				srcollWidth:0
+				releaseAnimation:{
+					"isShow":false,
+					"releaseAnimation":{}
+				}
+				
             }
         },
         methods: {
 			tabChang(key){
 				this.navTab.navTabNum = key;
-				let navTabLineLeft = 95;
 				let Animation = uni.createAnimation({
 					duration:300,
 					timingFunction:"ease-in-out"
@@ -182,22 +205,37 @@
 				this.navTabBottomLineAnimation = Animation;		
 				Animation.translateX(key*85).step();
 				this.navTabBottomLineAnimation = Animation.export(); 
-				let indexTagAnimation = uni.createAnimation({
-					duration:300,
-					timingFunction:"ease-in-out"
-				});
-				this.indexTagAnimation = indexTagAnimation;
-				indexTagAnimation.translateX(50*key).translateX(0*key).step();
-				this.indexTagAnimation = indexTagAnimation.export();
-								
+			},
+			
+			toRelease(openType){
+				uni.navigateTo({
+					url:"release?type=" + openType,
+					animationType:"",
+					animationDuration:200
+				})
 			}
+			
         },
 		onLoad(){
-			uni.getSystemInfo({
-				success(res) {
-					this.srcollWidth = res.windowWidth;
+		
+		},
+		onNavigationBarButtonTap(e){
+			if(e.filter === "release"){
+				let mnimation = uni.createAnimation({
+					duration:400, 
+					timingFunction:"ease"
+				}); 
+				this.releaseAnimation.releaseAnimation = mnimation;
+				if(this.releaseAnimation.isShow){
+					mnimation.height(0).opacity(0).step();
+					this.releaseAnimation.releaseAnimation = mnimation.export();
+					this.releaseAnimation.isShow = false;
+				}else{
+					mnimation.height(150).opacity(1).step();
+					this.releaseAnimation.releaseAnimation = mnimation.export();
+					this.releaseAnimation.isShow = true;
 				}
-			})
+			}
 		},
 		onPullDownRefresh (){
 			uni.startPullDownRefresh({
@@ -224,12 +262,58 @@
 		width: 100%; 
 		height: 100%;		
 	}
-
+	.flex-com{
+		flex-direction: column;
+		justify-content: space-around;
+	}
 	.nav-tab,.info-list-area,.info-bottom,.info-list-item,.info-list-item :nth-child(1),.qianming,.info-qianming,.flex-row{
 		display: flex;		
 	}
 	.nav-tab,.time-text,.iconxiaocao,.info-name,.qianming,.iconaddress,.iconzan1,.iconpinglun1,.iconzhuanfa{
 		position: relative;
+	}
+	.info-list-area .info-list-item :nth-child(1){
+		flex-direction: row;
+	}
+	.info-list-area .info-list-item :nth-child(2){
+		font-size: 15px;
+		letter-spacing: 0.5px;
+		margin:8upx;
+	}
+	.iconpinglun,.time-text,.address-text{
+		color:#c2c2c2;
+	}
+	.qianming,.info-list-area{
+		justify-content: center;
+	}
+	.flex-row,.info-list-area{
+		align-items: center;
+	}
+	.info-list-area,.wish-area,.footprint,.album{
+		min-height: 500px;
+		width: 100%;
+		display: flex;
+		align-items:center;
+		flex-flow: row wrap;
+	}
+	.info-list-area .info-list-item .info-qianming{
+		font-size: 12px;
+	}
+	
+	.info-list-area .info-list-item .info-name{
+		color: #3f3838;
+		font-size: 15px;
+	}
+	.release{
+		justify-content: space-around;
+		box-shadow: 0 5px 5px #eee;
+		flex-direction:column;
+		position: fixed;
+		width: 100%;
+		z-index: 2;
+		background-color:rgba(255,255,255,1);
+		overflow: hidden;
+		height:0upx;
 	}
 	.nav-tab{
 		padding:18px 0px 20upx 15upx;		
@@ -284,28 +368,15 @@
 	.iconaddress{
 		top: 3px;
 	}
-	.iconpinglun,.time-text,.address-text{
-		color:#c2c2c2;
-	}
+	
 	
 	.time-text{
 		font-size: 8px;
 		top: -4px;
 		left: -4px;
 	}
-	.qianming,.info-list-area{
-		justify-content: center;
-	}
-	.flex-row,.info-list-area{
-		align-items: center;
-	}
-	.info-list-area,.wish-area,.footprint,.album{
-		min-height: 500px;
-		width: 100%;
-		display: flex;
-		align-items:center;
-		flex-flow: row wrap;
-	}
+	
+
 	.wish-area{
 		flex-direction: column;
 		margin-top: 15px;
@@ -360,7 +431,6 @@
 	.info-list-area{	
 		background-color: #eee;		
 		flex-direction: column;
-		padding-left: 15upx;
 	}
 	.flex-row{
 		flex-direction: row;
@@ -376,17 +446,10 @@
 		margin-top: 0;
 		background-color: #fff;
 		flex-direction: column;
-		padding: 10px 0px 0px 0px;
-		
+		padding: 8px;
+		margin-right: 8px;
 	}
-	.info-list-area .info-list-item :nth-child(1){
-		flex-direction: row;
-	}
-	.info-list-area .info-list-item :nth-child(2){
-		font-size: 15px;
-		letter-spacing: 0.5px;
-		margin:8upx;
-	}
+	
 	.info-head-img-area{
 		width: 110upx;
 		height: 110upx;
@@ -402,14 +465,7 @@
 		flex-direction: column;
 		align-items:flex-start;
 	}
-	.info-list-area .info-list-item .info-qianming{
-		font-size: 12px;
-	}
 	
-	.info-list-area .info-list-item .info-name{
-		color: #3f3838;
-		font-size: 15px;
-	}
 	.shadow{
 		height: 100%;
 		width: 100%;
