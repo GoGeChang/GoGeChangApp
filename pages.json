@@ -47,21 +47,36 @@
 		    }
 		},
 		{
-			"path": "pages/tabBar/listening",
+			"path": "pages/tabBar/music",
 			"style": {
-				"navigationBarTitleText": "静听"	,
+				"navigationBarTitleText":"",
+				"transparentTitle":"always",
 				"app-plus":{
 					"titleNView":{
-						"type":"transparent",
-						"searchInput":{
-							"backgroundColor": "#fff",
-							"borderRadius": "6px", //输入框圆角
-							"placeholder": "请输入搜索内容",
-							"disabled": true //disable时点击输入框不置焦，可以跳到新页面搜索
-						}
+						"titleColor":"#fff",
+						"backgroundColor":"rgba(0,0,0,0)",
+						"buttons":[ 
+						 {
+							 "type":"none",						
+							 "text":"\ue65a",
+							 "fontSize":"30px",
+							 "width":"60px",
+							 "fontSrc":"/static/ali_font/iconfont.ttf",
+							 "float":"left",
+							 "filter":""//自定义属性来判断我点击的按钮
+						 },
+						 {
+							 "type":"none",
+							 "fontSrc":"/static/ali_font/iconfont.ttf",
+							 "text":"\ue613",
+							 "fontSize":"25px",
+							 "width":"60px",
+							 "float":"right",
+							 "filter":"search"//自定义属性来判断我点击的按钮
+						 }
+						]
 					}
 				}
-				
 			}
 		}
         
@@ -71,7 +86,40 @@
 				"navigationBarTitleText": "信息发布",
 				"app-plus":{
 					"animationType":"fade-in",
-					"animationDuration":300
+					"animationDuration":200
+				}
+			}
+        }
+        ,{
+            "path" : "pages/music/music_list",
+            "style" : {
+				"navigationBarTitleText": " "
+			}
+        }
+        ,{
+            "path" : "pages/music/music_search",
+            "style":{
+				"app-plus":{
+					"titleNView":{
+						"searchInput":{
+							"autoFocus":true,
+							"borderRadius":"8px",
+							"placeholder":"输入喜欢的歌曲名吧",
+							"disabled":false,
+							"align":"left"
+						},
+						"buttons":[
+						 {
+							 "type":"none",
+							 "text":"搜索",
+							 "fontSize":"40upx",
+							 "width":"60px",
+							 "float":"right",
+							 "filter":"search"//自定义属性来判断我点击的按钮
+						 }
+						],
+						"scrollIndicator":"none"
+					}
 				}
 			}
         }
@@ -95,7 +143,7 @@
 			"text":"心情"
 			
 			},{
-			"pagePath":"pages/tabBar/listening" ,
+			"pagePath":"pages/tabBar/music" ,
 			"iconPath":"static/imges/tabBar/musical.png",
 			"selectedIconPath": "static/imges/tabBar/selectMusical.png",
 			"text":"静听"

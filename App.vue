@@ -14,6 +14,7 @@ export default {
 
 <style>
 	@import url("/static/ali_font/iconfont.css");
+	@import url("/static/css/public.css");
 /* 解决头条小程序组件内引入字体不生效的问题 */
 /* #ifdef MP-TOUTIAO */
 @font-face {
@@ -24,5 +25,21 @@ export default {
 	font-family: "iconfont";
 	src: url('/static/ali_font/iconfont.ttf');
 }	
+.shadow{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.5);
+}
+::-webkit-scrollbar {  
+    display: none;  
+    width: 0 !important;  
+    height: 0 !important;  
+    -webkit-appearance: none;  
+    background: transparent;  
+}
+
 /* #endif */
 </style>

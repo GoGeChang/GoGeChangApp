@@ -1,10 +1,5 @@
 <template>
     <view>
-		<!-- <view id="toTop"></view>
-		<uni-fab
-		:popMenu = "popMenu"
-		:pattern = "pattern"
-		></uni-fab>	 -->
 		<view class="zhanwei"></view>
 		<view class="zhanwei"></view>	
 		<view class="flex-row flex-com release"
@@ -128,12 +123,6 @@
     export default {
         data() {
             return {
-				popMenu:false,
-				pattern:{
-					color:"#000",
-					buttonColor:"rgb(0,122,255)",
-					selectedColor:"#000"
-				},
 				person:[
 					{
 						name:"常开国",
@@ -231,7 +220,7 @@
 					this.releaseAnimation.releaseAnimation = mnimation.export();
 					this.releaseAnimation.isShow = false;
 				}else{
-					mnimation.height(150).opacity(1).step();
+					mnimation.height(100).opacity(1).step();
 					this.releaseAnimation.releaseAnimation = mnimation.export();
 					this.releaseAnimation.isShow = true;
 				}
@@ -465,7 +454,6 @@
 		flex-direction: column;
 		align-items:flex-start;
 	}
-	
 	.shadow{
 		height: 100%;
 		width: 100%;
@@ -474,4 +462,4 @@
 		left: 0;
 		background-color: rgba(0,0,0,.5);
 	}
-</style>
+</style> 
