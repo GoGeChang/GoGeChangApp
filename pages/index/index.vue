@@ -3,18 +3,18 @@
 		<view class="zhanwei"></view>
 		<view class="zhanwei"></view>	
 		<view class="flex-row flex-com release"
-			:animation = "releaseAnimation.releaseAnimation" style="height:0px;opacity: 0;"
+			:animation = "releaseAnimation.releaseAnimation" style="height:0px;"
 		>
 			<view class="flex-row flex-com " style="width: 100%;">
-				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('xinqing')">
+				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('mood')">
 					<image src="../../static/imges/index/mood.png" style="height: 50upx;width: 50upx;"></image>
 					<view>心情</view>
 				</view>
-				<view class="flex-row flex-com" hover-class="none">
+				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('wish')">
 					<image src="../../static/imges/index/wish.png" style="height: 50upx;width: 50upx;"></image>
 					<text>心愿</text>
 				</view>	
-				<view class="flex-row flex-com" hover-class="none">
+				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('picture')">
 					<image src="../../static/imges/index/picture.png" style="height: 40upx;width: 50upx;"></image>
 					<text>上传照片</text>
 				</view>	
@@ -37,80 +37,106 @@
 				:animation="navTabBottomLineAnimation"  style="left:12px;">
 			 </view>			
 		</view>
-		<view  class="infor-tab">
-			<view   class = "info-list-area" 
-					v-show = "navTab.navTabNum===0" 
-					
-			> 
-				<view class="info-list-item" 
-					  v-for="(vlue,key) in person" 
-				      :key="key"
-			    >				
-					<view>
-						<view class="info-head-img-area">
-							<image class="info-head-img"
-							 src="../../static/imges/personal_center/cap-2923682_1920.jpg"
-							 mode = "aspectFill"
-							></image>
-						</view>						
-						<view class="qianming">						
-							<view class="info-name">{{vlue.name}}</view>
-							<view class="info-qianming">
-								<view class="iconfont iconpinglun"></view>
-								<view class="info-qianming time-text">
-									{{vlue.time}}
+		<view  class="infor-tab" style="height: 100%;">
+			<!--可以通过改变current的属性来改变swiper-item的索引，显示不同的界面-->
+			<swiper 
+				:style="{height: srcoHeight + 'px'}"
+				duration = "400"
+				:current="currentItemId" 
+				@change="swiperChange"
+			>
+				<swiper-item item-id="1">
+					<scroll-view
+						scroll-y=true
+					>
+						<view   class = "info-list-area"
+						> 
+							<view class="info-list-item" 
+								  v-for="(vlue,key) in person" 
+							      :key="key"
+								  
+						    >				
+								<view>
+									<view class="info-head-img-area">
+										<image class="info-head-img"
+										 src="../../static/imges/personal_center/cap-2923682_1920.jpg"
+										 mode = "aspectFill"
+										></image>
+									</view>						
+									<view class="qianming">						
+										<view class="info-name">{{vlue.name}}</view>
+										<view class="info-qianming">
+											<view class="iconfont iconpinglun"></view>
+											<view class="info-qianming time-text">
+												{{vlue.time}}
+											</view>
+										</view>
+									</view>
+								</view>
+								<view>						
+									<text class="infor-content">{{vlue.qianming}}</text>
+								</view>				
+								<view class="info-bottom">
+									<view>						
+										<view class="address-text">
+											<view class="iconfont iconaddress"></view>
+											{{vlue.address}}
+										</view>						
+									</view>		 
+									<view class="flex-row" style="position: relative;right: 15upx;top: 8upx;">
+										<view class="iconfont iconzan1"></view>
+										<view class="iconfont iconpinglun1"></view>
+										<view class="iconfont iconzhuanfa"></view>
+									</view>			
 								</view>
 							</view>
 						</view>
-					</view>
-					<view>						
-						<text class="infor-content">{{vlue.qianming}}</text>
-					</view>				
-					<view class="info-bottom">
-						<view>						
-							<view class="address-text">
-								<view class="iconfont iconaddress"></view>
-								{{vlue.address}}
-							</view>						
-						</view>		 
-						<view class="flex-row" style="position: relative;right: 15upx;top: 5upx;">
-							<view class="iconfont iconzan1"></view>
-							<view class="iconfont iconpinglun1"></view>
-							<view class="iconfont iconzhuanfa"></view>
-						</view>			
-					</view>
-				</view>
-			</view>
-			<view class="wish-area" 
-				v-show="navTab.navTabNum === 1"
-			> 
-				<view class="wish-list-item" 
-					v-for="(val,key) in wishList"
-					:key="key"
-				>
-					<image 
-						:src = "wishList[key].image" 
-						mode = "aspectFill"
-						></image>
-						<view class="shadow"></view>
-						<view class="wish-list-text">
-							<text>{{key + 1}}.</text>
-							{{wishList[key].context}} 
+					</scroll-view>	
+					
+				</swiper-item>
+				<swiper-item item-id="2">
+					<scroll-view
+					scroll-y=true
+					>
+						<view class="wish-area">
+							<view class="wish-list-item" 
+								v-for="(val,key) in wishList"
+								:key="key"
+							>
+								<image 
+									:src = "wishList[key].image" 
+									mode = "aspectFill"
+									></image>
+									
+									<view class="wish-list-text">
+										<text>{{key + 1}}.</text>
+										{{wishList[key].context}} 
+									</view>
+									<view class="shadow"></view>
+							</view>
+							
 						</view>
-				</view>
-				
-			</view>
-			<view class="album" v-show="navTab.navTabNum===2"
-			> 
-				<view class="album-list-area">
-					<image class="album-img" v-for="(src,key)  in album"
-							   :src = "src"
-							   mode="aspectFill"
-							   :key = "key"
+					</scroll-view>
+					
+				</swiper-item>
+				<swiper-item item-id="3">
+					<scroll-view
+						scroll-y=true
+					>
+						<view class="album"
 						> 
-					</image>
-				</view>
-			</view>
+							<view class="album-list-area">
+								<image class="album-img" v-for="(src,key)  in album"
+										   :src = "src"
+										   mode="aspectFill"
+										   :key = "key"
+									> 
+								</image>
+							</view>
+						</view>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
 			<!-- <view class="footprint" v-if="navTab.navTabNum === 2">
 				<map style="width: 100%;height: 100%;" ></map>
 			</view> -->
@@ -180,12 +206,15 @@
 				releaseAnimation:{
 					"isShow":false,
 					"releaseAnimation":{}
-				}
+				},
+				srcoHeight:0,
+				currentItemId:0
 				
             }
         },
         methods: {
 			tabChang(key){
+				this.currentItemId = key;
 				this.navTab.navTabNum = key;
 				let Animation = uni.createAnimation({
 					duration:300,
@@ -193,7 +222,7 @@
 				});
 				this.navTabBottomLineAnimation = Animation;		
 				Animation.translateX(key*85).step();
-				this.navTabBottomLineAnimation = Animation.export(); 
+				this.navTabBottomLineAnimation = Animation.export(); 				
 			},
 			
 			toRelease(openType){
@@ -202,25 +231,49 @@
 					animationType:"",
 					animationDuration:200
 				})
+				let mnimation = uni.createAnimation({
+					duration:400, 
+					timingFunction:"ease"
+				}); 
+				this.releaseAnimation.releaseAnimation = mnimation;
+				mnimation.height(0).step();
+				this.releaseAnimation.releaseAnimation = mnimation.export();
+				this.releaseAnimation.isShow = false;
+			
+			},
+			swiperChange(e){
+				this.navTab.navTabNum = e.detail.current;
+				let Animation = uni.createAnimation({
+					duration:300,
+					timingFunction:"ease-in-out"
+				});
+				this.navTabBottomLineAnimation = Animation;		
+				Animation.translateX(e.detail.current*85).step();
+				this.navTabBottomLineAnimation = Animation.export(); 
 			}
 			
-        },
-		onLoad(){
-		
+        }, 
+		onShow() {
+			uni.getSystemInfo({
+				success: res =>{
+					this.srcoHeight = res.windowHeight;
+				}
+			})
 		},
-		onNavigationBarButtonTap(e){
-			if(e.filter === "release"){
+		
+		onNavigationBarButtonTap(e){			
+			if(e.filter === "release"){				
 				let mnimation = uni.createAnimation({
 					duration:400, 
 					timingFunction:"ease"
 				}); 
 				this.releaseAnimation.releaseAnimation = mnimation;
 				if(this.releaseAnimation.isShow){
-					mnimation.height(0).opacity(0).step();
+					mnimation.height(0).step();
 					this.releaseAnimation.releaseAnimation = mnimation.export();
 					this.releaseAnimation.isShow = false;
 				}else{
-					mnimation.height(100).opacity(1).step();
+					mnimation.height(100).step();
 					this.releaseAnimation.releaseAnimation = mnimation.export();
 					this.releaseAnimation.isShow = true;
 				}
@@ -279,7 +332,7 @@
 		align-items: center;
 	}
 	.info-list-area,.wish-area,.footprint,.album{
-		min-height: 500px;
+		
 		width: 100%;
 		display: flex;
 		align-items:center;
@@ -293,6 +346,7 @@
 		color: #3f3838;
 		font-size: 15px;
 	}
+	
 	.release{
 		justify-content: space-around;
 		box-shadow: 0 5px 5px #eee;
@@ -305,18 +359,17 @@
 		height:0upx;
 	}
 	.nav-tab{
-		padding:18px 0px 20upx 15upx;		
+		padding:18px 0px 20upx 15upx;	
 	}
 	.nav-tab:first-child{
 		margin-left: -22px;
 	}
 	.nav-tab-tag{
 		margin-left: 30px;
-		font-size: 18px;
 		text-align: center;
 		padding: 1px 3px;
-		flex-direction: row;
-		flex-wrap: nowrap;
+		flex-direction: column;
+		flex-wrap: wrap;
 	}
 	.nav-tab-tag:nth-child(1){
 		margin-left: 5px;
@@ -387,7 +440,8 @@
 		text-align: left;
 		padding-left: 15px;
 		width: 100%;
-		color: #eee;
+		color: #fff;
+		z-index: 2;
 	}
 	.album{
 		justify-content: center;
@@ -460,6 +514,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		background-color: rgba(0,0,0,.5);
+		background-color: rgba(0,0,0,.4);
+	}
+	swiper-item{
+		overflow: auto;
 	}
 </style> 

@@ -84,6 +84,7 @@
             "path" : "pages/index/release",
             "style" : {
 				"navigationBarTitleText": "信息发布",
+				"transparentTitle":"always",
 				"app-plus":{
 					"animationType":"fade-in",
 					"animationDuration":200

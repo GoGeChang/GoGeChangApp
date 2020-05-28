@@ -1,7 +1,7 @@
 <script>
 export default {
 	onLaunch: function() {
-		console.log('App Launch');
+		console.log('App Launch'); 		
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -40,6 +40,11 @@ export default {
     -webkit-appearance: none;  
     background: transparent;  
 }
-
+page{
+	height: 100% !important;
+}
+uni-page-body,#app{
+	height: 100% !important;
+}
 /* #endif */
 </style>
