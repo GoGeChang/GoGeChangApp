@@ -84,10 +84,21 @@
             "path" : "pages/index/release",
             "style" : {
 				"navigationBarTitleText": "信息发布",
-				"transparentTitle":"always",
 				"app-plus":{
-					"animationType":"fade-in",
-					"animationDuration":200
+					"animationType":"fade-in",				
+					"animationDuration":200,
+					"titleNView":{
+						"buttons":[
+							{
+								"type":"none",
+								"float":"right",
+								"text":"发布",
+								"fontSize":"17px",
+								"width":"60px",
+								"filter":"release"
+							}
+						]
+					}
 				}
 			}
         }
@@ -129,7 +140,10 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#fff",
-		"backgroundColor": "#FFFFFF"
+		"backgroundColor": "#FFFFFF",
+		"app-plus":{
+			"bounce":"none"
+		}
 	},
 	"tabBar":{
 		"color":"#aaa",

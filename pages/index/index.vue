@@ -3,7 +3,7 @@
 		<view class="zhanwei"></view>
 		<view class="zhanwei"></view>	
 		<view class="flex-row flex-com release"
-			:animation = "releaseAnimation.releaseAnimation" style="height:0px;"
+			:animation = "releaseAnimation.releaseAnimation" style="height:0px;" 
 		>
 			<view class="flex-row flex-com " style="width: 100%;">
 				<view class="flex-row flex-com" hover-class="none"  @click="toRelease('mood')">
@@ -45,17 +45,17 @@
 				:current="currentItemId" 
 				@change="swiperChange"
 			>
-				<swiper-item item-id="1">
-					<scroll-view
-						scroll-y=true
+				<swiper-item item-id="1" > 
+					<scroll-view scroll-y=true 
+					
 					>
 						<view   class = "info-list-area"
 						> 
 							<view class="info-list-item" 
 								  v-for="(vlue,key) in person" 
-							      :key="key"
+								  :key="key"
 								  
-						    >				
+							>				
 								<view>
 									<view class="info-head-img-area">
 										<image class="info-head-img"
@@ -83,21 +83,18 @@
 											{{vlue.address}}
 										</view>						
 									</view>		 
-									<view class="flex-row" style="position: relative;right: 15upx;top: 8upx;">
+									<!-- <view class="flex-row" style="position: relative;right: 15upx;top: 8upx;">
 										<view class="iconfont iconzan1"></view>
 										<view class="iconfont iconpinglun1"></view>
 										<view class="iconfont iconzhuanfa"></view>
-									</view>			
+									</view>	 -->		
 								</view>
 							</view>
 						</view>
-					</scroll-view>	
-					
+					</scroll-view>
 				</swiper-item>
 				<swiper-item item-id="2">
-					<scroll-view
-					scroll-y=true
-					>
+					<scroll-view scroll-y>
 						<view class="wish-area">
 							<view class="wish-list-item" 
 								v-for="(val,key) in wishList"
@@ -113,11 +110,9 @@
 										{{wishList[key].context}} 
 									</view>
 									<view class="shadow"></view>
-							</view>
-							
+							</view>						
 						</view>
 					</scroll-view>
-					
 				</swiper-item>
 				<swiper-item item-id="3">
 					<scroll-view
@@ -250,13 +245,14 @@
 				this.navTabBottomLineAnimation = Animation;		
 				Animation.translateX(e.detail.current*85).step();
 				this.navTabBottomLineAnimation = Animation.export(); 
+				
 			}
 			
         }, 
 		onShow() {
 			uni.getSystemInfo({
 				success: res =>{
-					this.srcoHeight = res.windowHeight;
+					this.srcoHeight = res.windowHeight - 40;
 				}
 			})
 		},
@@ -356,7 +352,7 @@
 		z-index: 2;
 		background-color:rgba(255,255,255,1);
 		overflow: hidden;
-		height:0upx;
+		height:50upx;
 	}
 	.nav-tab{
 		padding:18px 0px 20upx 15upx;	
