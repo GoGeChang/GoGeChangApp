@@ -14,6 +14,7 @@ export default {
 
 <style>
 	@import url("/static/ali_font/iconfont.css");
+	/* @import url("//at.alicdn.com/t/font_1787456_3jl5nzy4r6q.css"); */
 	@import url("/static/css/public.css");
 /* 解决头条小程序组件内引入字体不生效的问题 */
 /* #ifdef MP-TOUTIAO */

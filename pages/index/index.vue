@@ -287,8 +287,7 @@
 </script>
 
 <style>
-	@import url("https://at.alicdn.com/t/font_1787456_qymsrof12v.css");
-	/* @import url("../../static/ali_font/iconfont.css"); */
+	@import url("../../static/ali_font/iconfont.css")
 	.address-text,.iconpinglun,.iconaddress{
 		padding-right: 8upx;
 	}
